@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Admin Dashboard</h2>
+        <button onclick="fetchCases()">View Cases</button>
+        <button onclick="fetchUsers()">Manage Users</button>
+        <button onclick="logout()">Logout</button>
+        
+        <!-- Case Management Section -->
+        <h3>Case Management</h3>
+        <form id="caseForm">
+            <input type="text" id="caseTitle" placeholder="Case Title" required>
+            <input type="text" id="caseStatus" placeholder="Status" required>
+            <button type="submit">Add Case</button>
+        </form>
+
+        <h3>Cases List</h3>
+        <table id="casesTable">
+            <tr>
+                <th>Case ID</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+
+        <!-- User Management Section -->
+        <h3>User Management</h3>
+        <form id="userForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <select id="role">
+                <option value="admin">Admin</option>
+                <option value="investigator">Investigator</option>
+            </select>
+            <button type="submit">Add User</button>
+        </form>
+
+        <h3>Users List</h3>
+        <table id="usersTable">
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
