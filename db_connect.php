@@ -1,14 +1,18 @@
 <?php
-$servername = "localhost";
-$username = "root";  // Default username in XAMPP
-$password = "";  // Default password is empty
-$database = "cybercrime_dbms"; // Your database name
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
+$host = ""; // Enter your MySQL database host/server address here
+$username = ""; // Enter your MySQL database username here
+$password = ""; // Enter your MySQL database password here
+$database = ""; // Enter your MySQL database name here
 
-// Check connection
+$port = 3306;// Enter your MySQL port number here (3306 is the standard MySQL port)
+
+$conn = new mysqli($host, $username, $password, $database, $port);
+
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+    die("Database connection failed: " . $conn->connect_error);
+}
+
+$conn->set_charset("utf8mb4");
+
 ?>
