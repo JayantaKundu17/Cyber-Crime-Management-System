@@ -401,7 +401,7 @@ This repository is intended primarily as an **educational project and demonstrat
 
 ## Live Demo
 
-**Coming soon.**
+**cybercrime-management.infinityfreeapp.com**
 
 
 ---
