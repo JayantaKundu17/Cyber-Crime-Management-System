@@ -1,3 +1,9 @@
+## Live Demo
+
+[https://cybercrime-management.infinityfreeapp.com/](https://cybercrime-management.infinityfreeapp.com/)
+
+---
+
 # Cyber Crime Management System
 
 A web-based **Cyber Crime Management System** developed to assist in organizing and managing information related to cybercrime investigations. The system provides separate modules for managing users, cases, victims, suspects, officers, reports, evidence, and audit logs.
@@ -398,13 +404,6 @@ This repository is intended primarily as an **educational project and demonstrat
 
 ---
 
-
-## Live Demo
-
-[**Visit the Live Website**](https://cybercrime-management.infinityfreeapp.com/)
-
-
----
 
 ## Future Improvements
 
