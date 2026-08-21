@@ -62,7 +62,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Administrator') {
 </head>
 <body>
     <div class="dashboard-container">
-        <img src="../assets/logo.png" alt="Logo" class="logo">
+        <img src="../assets/bank-fraud.png" alt="Logo" class="logo">
         <h2>Welcome, Admin!</h2>
         <a href="manage_users.php" class="dashboard-button">Manage Users</a>
         <a href="../cases/manage_cases.php" class="dashboard-button">Case Management</a>

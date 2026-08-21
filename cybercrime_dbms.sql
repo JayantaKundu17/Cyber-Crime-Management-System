@@ -1,9 +1,6 @@
 -- Cyber Crime Management System - Public Demo Database
 -- Safe demo data only. No real user records or personal information.
 
-CREATE DATABASE IF NOT EXISTS `cybercrime_dbms`;
-USE `cybercrime_dbms`;
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -111,23 +108,30 @@ INSERT INTO `audit_log` (`log_id`, `user_id`, `action`, `timestamp`) VALUES
 (2, 1002, 'Viewed cases', '2025-04-02 09:05:00');
 
 ALTER TABLE `audit_log`
-  ADD CONSTRAINT `audit_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `audit_log_ibfk_1`
+  FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 ALTER TABLE `cases`
-  ADD CONSTRAINT `cases_ibfk_1` FOREIGN KEY (`officer_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `cases_ibfk_1`
+  FOREIGN KEY (`officer_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
 
 ALTER TABLE `evidence`
-  ADD CONSTRAINT `evidence_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `evidence_ibfk_1`
+  FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE;
 
 ALTER TABLE `reports`
-  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`officer_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `reports_ibfk_1`
+  FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reports_ibfk_2`
+  FOREIGN KEY (`officer_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
 
 ALTER TABLE `suspects`
-  ADD CONSTRAINT `suspects_ibfk_1` FOREIGN KEY (`crime_associated`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `suspects_ibfk_1`
+  FOREIGN KEY (`crime_associated`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE;
 
 ALTER TABLE `victims`
-  ADD CONSTRAINT `victims_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `victims_ibfk_1`
+  FOREIGN KEY (`case_id`) REFERENCES `cases` (`case_id`) ON DELETE CASCADE;
 
 ALTER TABLE `users` AUTO_INCREMENT = 1003;
 ALTER TABLE `cases` AUTO_INCREMENT = 3;

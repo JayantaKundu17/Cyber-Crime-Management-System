@@ -1,38 +1,71 @@
 <?php
 session_start();
+
 include '../db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $sql = "SELECT * FROM Users WHERE email=?";
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+
+    if ($email === '' || $password === '') {
+        die("Email and password are required.");
+    }
+
+    // Use lowercase table name: users
+    $sql = "SELECT * FROM users WHERE email = ?";
+
     $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        die("Login query failed: " . $conn->error);
+    }
+
     $stmt->bind_param("s", $email);
-    $stmt->execute();
+
+    if (!$stmt->execute()) {
+        die("Login execution failed: " . $stmt->error);
+    }
+
     $result = $stmt->get_result();
 
     if ($result && $result->num_rows > 0) {
+
         $row = $result->fetch_assoc();
+
         if (password_verify($password, $row['password'])) {
-            // Set session variables
+
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['role'] = $row['role'];
 
-            // ✅ Insert login action into audit_log
+            // Record login in audit log
             $action = "Logged in";
-            $log_stmt = $conn->prepare("INSERT INTO audit_log (user_id, action, timestamp) VALUES (?, ?, NOW())");
-            $log_stmt->bind_param("is", $row['user_id'], $action);
-            $log_stmt->execute();
-            $log_stmt->close();
 
+            $log_stmt = $conn->prepare(
+                "INSERT INTO audit_log (user_id, action, timestamp)
+                 VALUES (?, ?, NOW())"
+            );
+
+            if ($log_stmt) {
+                $log_stmt->bind_param(
+                    "is",
+                    $row['user_id'],
+                    $action
+                );
+                $log_stmt->execute();
+                $log_stmt->close();
+            }
+
+            // Redirect to the PHP dashboard
             header("Location: ../index.php");
             exit();
+
         } else {
-            echo "<p style='color:red;'>Incorrect password!</p>";
+            $error = "Incorrect password!";
         }
+
     } else {
-        echo "<p style='color:red;'>User not found!</p>";
+        $error = "User not found!";
     }
 
     $stmt->close();
@@ -43,7 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Cyber Crime Portal</title>
+
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -73,6 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-top: 15px;
             border: 1px solid #ccc;
             border-radius: 8px;
+            box-sizing: border-box;
         }
 
         button {
@@ -94,17 +130,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .error {
             color: red;
             text-align: center;
+            margin-top: 15px;
         }
     </style>
 </head>
+
 <body>
+
 <div class="login-container">
+
     <h2>Login</h2>
+
+    <?php if (isset($error)): ?>
+        <div class="error">
+            <?php echo htmlspecialchars($error); ?>
+        </div>
+    <?php endif; ?>
+
     <form method="POST">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+        >
+
         <button type="submit">Login</button>
+
     </form>
+
 </div>
+
 </body>
 </html>

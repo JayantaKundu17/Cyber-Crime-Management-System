@@ -65,7 +65,7 @@ $dashboard_url = ($_SESSION['role'] === 'Administrator') ? "admin/admin_dashboar
 </head>
 <body>
   <div class="container">
-    <img src="assets/logo.png" alt="Cyber Crime Logo" class="logo">
+    <img src="assets/cyber-crime-logo.png" alt="Cyber Crime Logo" class="logo">
     <h1>Welcome to Cyber Crime Management System</h1>
     <p>Click below to go to your dashboard:</p>
     <a href="<?php echo $dashboard_url; ?>"><button>Go to Dashboard</button></a>

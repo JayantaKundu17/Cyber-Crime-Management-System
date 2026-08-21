@@ -109,7 +109,7 @@ if (!$user) {
             <option value="Officer" <?= $user['role'] === 'Officer' ? 'selected' : '' ?>>Officer</option>
         </select>
         <button type="submit">Update User</button>
-        <a href="manage_users.php">? Back to User List</a>
+        <a href="manage_users.php"> Back to User List</a>
     </form>
 </body>
 </html>
