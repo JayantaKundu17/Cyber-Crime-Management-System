@@ -2,8 +2,9 @@
 
 [https://cybercrime-management.infinityfreeapp.com/](https://cybercrime-management.infinityfreeapp.com/)
 
-DEMO EMAIL-admin@example.com
-DEMO PASSWORD-Demo@123
+DEMO EMAIL : admin@example.com
+
+DEMO PASSWORD : Demo@123
 
 ---
 
